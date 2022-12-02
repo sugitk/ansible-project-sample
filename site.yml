@@ -2,5 +2,15 @@
 - hosts: all
   gather_facts: no
   tasks:
-    - debug:
-        msg: "pattern 2"
+    - name: debug
+      debug:
+        msg: "branch1"
+
+    - name: get current https stats
+      community.general.nginx_status_info:
+        url: https://localhost/nginx_status
+      register: result
+
+    - name: debug
+      debug:
+        var: result
